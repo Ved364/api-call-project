@@ -1,7 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import Pagination from "../components/Pagination";
-import { useNavigate, useLocation } from "react-router-dom";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Pagination from '../components/Pagination';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 type User = {
   id: number;
@@ -17,15 +17,14 @@ type Name = {
 
 const Users = () => {
   const names: Name[] = [
-    { navName: "Dhanusree", navLink: "/albums" },
-    { navName: "Jaya Chandra", navLink: "/Usertask1" },
+    { navName: 'Dhanusree', navLink: '/albums' },
+    { navName: 'Jaya Chandra', navLink: '/Usertask1' },
   ];
 
   const [data, setData] = useState<User[]>([]);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const initialPage = Number(query.get("page")) || 1;
-  console.log(query.get("page"));
+  const initialPage = Number(query.get('page')) || 1;
   const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 5;
   const navigate = useNavigate();
@@ -40,26 +39,28 @@ const Users = () => {
   };
 
   const handleUserpage = () => {
-    navigate("/home");
+    navigate('/');
   };
 
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
-  const totalPages = Math.ceil(data.length / rowsPerPage);
+  const totalPages = Math.ceil(10 / rowsPerPage);
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get(
+        `https://jsonplaceholder.typicode.com/users?_start=${
+          rowsPerPage * (currentPage - 1)
+        }&_limit=${rowsPerPage * currentPage}`
+      )
       .then((res) => setData(res.data))
       .catch((err) => console.error(err));
-  }, []);
+  }, [currentPage]);
+
   return (
-    <div className="userBackground UserBackgroundImg">
-      <div className="UsersButton">
+    <div className='userBackground UserBackgroundImg'>
+      <div className='UsersButton'>
         <button
-          type="button"
-          className="btn btn-primary"
+          type='button'
+          className='btn btn-primary'
           onClick={handleUserpage}
         >
           Back
@@ -68,18 +69,18 @@ const Users = () => {
           {names.map((itemName, i) => (
             <button
               key={i}
-              type="button"
+              type='button'
               onClick={() => navigate(itemName.navLink)}
-              className="btn btn-primary mx-2"
+              className='btn btn-primary mx-2'
             >
               {itemName.navName}
             </button>
           ))}
         </div>
       </div>
-      <div className="background_table mt-3 d-flex flex-column justify-content-center align-items-center">
-        <h3 className="text-center text-white">Users</h3>
-        <table className="content_table">
+      <div className='background_table mt-3 d-flex flex-column justify-content-center align-items-center'>
+        <h3 className='text-center text-white'>Users</h3>
+        <table className='content_table'>
           <thead>
             <tr>
               <th>ID</th>
@@ -89,7 +90,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {currentRows.map((user, index) => (
+            {data.map((user, index) => (
               <tr key={index} onClick={() => handleRowsChange(user.id)}>
                 <td>{user.id}</td>
                 <td>{user.username}</td>
