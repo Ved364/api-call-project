@@ -18,6 +18,7 @@ const AlbumsPage = () => {
   const recordsPerPage = 10;
   const npage = Math.ceil(100 / recordsPerPage);
   const navigate = useNavigate();
+  const user = localStorage.getItem("email");
 
   useEffect(() => {
     axios
@@ -30,7 +31,11 @@ const AlbumsPage = () => {
         setData(res.data);
       })
       .catch((err) => console.log(err));
-  }, [currentPage]);
+
+    if (!user) {
+      navigate("/login");
+    }
+  }, [currentPage, user, navigate]);
 
   const prePage = () => {
     if (currentPage !== 1) {

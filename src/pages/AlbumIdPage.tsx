@@ -8,6 +8,7 @@ const AlbumIdPage = () => {
   const [album, setAlbum] = useState<albumtype | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const user = localStorage.getItem("email");
 
   useEffect(() => {
     axios
@@ -20,7 +21,10 @@ const AlbumIdPage = () => {
         console.log(err);
         setIsLoading(false);
       });
-  }, [id]);
+    if (!user) {
+      navigate("/login");
+    }
+  }, [id, user, navigate]);
 
   if (!album) {
     return <div>Album Not Found ..!</div>;

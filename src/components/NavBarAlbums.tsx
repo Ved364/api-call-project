@@ -21,7 +21,7 @@ const NavbarAlbums = () => {
     <>
       <div className="nav-bar">
         <div>
-          <button className="back-btn" onClick={() => navigate("/home")}>
+          <button className="back-btn" onClick={() => navigate("/")}>
             Go Back
           </button>
         </div>
