@@ -21,10 +21,11 @@ type UserDetails = {
   company: { name: string; catchPhrase: string; bs: string };
 };
 
-const UserDetails = () => {
+const UserDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const users = localStorage.getItem("email");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,9 +39,12 @@ const UserDetails = () => {
         console.log(err);
         setLoading(false);
       });
-  }, [id]);
+    if (!users) {
+      navigate("/login");
+    }
+  }, [id, navigate, users]);
 
-  const handleUserpage = () => {
+  const handleUserspage = () => {
     navigate("/users");
   };
 
@@ -59,7 +63,7 @@ const UserDetails = () => {
           <button
             type="button"
             className="btn btn-primary"
-            onClick={handleUserpage}
+            onClick={handleUserspage}
           >
             Back
           </button>
@@ -114,4 +118,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default UserDetailsPage;

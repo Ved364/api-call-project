@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginPage = () => {
   const [, setEmail] = useState([]);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Login = () => {
 
     alert("Login details saved!");
 
-    navigate("/home");
+    navigate("/");
   };
   return (
     <div className="loginPageBackground">
@@ -54,4 +54,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
