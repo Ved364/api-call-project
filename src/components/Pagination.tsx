@@ -1,14 +1,10 @@
-type PaginationProps = {
+type Pagination = {
   totalPages: number;
   currentPage: number;
   onPageChange: (pageNumber: number) => void;
 };
 
-const Pagination = ({
-  totalPages,
-  currentPage,
-  onPageChange,
-}: PaginationProps) => {
+const Pagination = ({ totalPages, currentPage, onPageChange }: Pagination) => {
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
