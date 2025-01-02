@@ -1,31 +1,25 @@
-type PaginationProps = {
+type Pagination = {
   totalPages: number;
   currentPage: number;
   onPageChange: (pageNumber: number) => void;
 };
 
-const Pagination = ({
-  totalPages,
-  currentPage,
-  onPageChange,
-}: PaginationProps) => {
-  const handleNextPage = () => {
+const Pagination = ({ totalPages, currentPage, onPageChange }: Pagination) => {
+  const handleChangePage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
     }
-  };
-
-  const handlePrevPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
     }
   };
+
   return (
     <div>
       <button
         type="button"
         className="btn btn-primary m-1"
-        onClick={handlePrevPage}
+        onClick={handleChangePage}
         disabled={currentPage === 0}
       >
         Previous Page
@@ -34,7 +28,7 @@ const Pagination = ({
       <button
         type="button"
         className="btn btn-primary m-1"
-        onClick={handleNextPage}
+        onClick={handleChangePage}
         disabled={currentPage === totalPages}
       >
         Next Page
