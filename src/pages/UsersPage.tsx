@@ -15,7 +15,7 @@ type Name = {
   navLink: string;
 };
 
-const Users = () => {
+const UsersPage = () => {
   const names: Name[] = [
     { navName: "Dhanusree", navLink: "/albums" },
     { navName: "Jaya Chandra", navLink: "/Usertask1" },
@@ -25,9 +25,9 @@ const Users = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const initialPage = Number(query.get("page")) || 1;
-  console.log(query.get("page"));
   const [currentPage, setCurrentPage] = useState(initialPage);
   const rowsPerPage = 5;
+  const user = localStorage.getItem("email");
   const navigate = useNavigate();
 
   const handlePageChange = (pageNumber: number) => {
@@ -35,25 +35,29 @@ const Users = () => {
     navigate(`?page=${pageNumber}`);
   };
 
-  const handleRowsChange = (userId: number) => {
+  const handleIndividualUser = (userId: number) => {
     navigate(`/user/${userId}`);
   };
 
   const handleUserpage = () => {
-    navigate("/home");
+    navigate("/");
   };
 
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = data.slice(indexOfFirstRow, indexOfLastRow);
-  const totalPages = Math.ceil(data.length / rowsPerPage);
+  const totalPages = Math.ceil(10 / rowsPerPage);
 
   useEffect(() => {
     axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get(
+        `https://jsonplaceholder.typicode.com/users?_start=${
+          rowsPerPage * (currentPage - 1)
+        }&_limit=${rowsPerPage * currentPage}`
+      )
       .then((res) => setData(res.data))
       .catch((err) => console.error(err));
-  }, []);
+    if (!user) {
+      navigate("/login");
+    }
+  }, [currentPage, navigate, user]);
   return (
     <div className="userBackground UserBackgroundImg">
       <div className="UsersButton">
@@ -89,8 +93,8 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {currentRows.map((user, index) => (
-              <tr key={index} onClick={() => handleRowsChange(user.id)}>
+            {data.map((user, index) => (
+              <tr key={index} onClick={() => handleIndividualUser(user.id)}>
                 <td>{user.id}</td>
                 <td>{user.username}</td>
                 <td>{user.name}</td>
@@ -109,4 +113,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UsersPage;

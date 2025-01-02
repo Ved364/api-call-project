@@ -5,22 +5,24 @@ type Name = {
   navName: string;
   navLink: string;
 };
-const Home = () => {
+const HomePage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string | null>(null);
-
-  useEffect(() => {
-    const StoredData = localStorage.getItem("email");
-    if (StoredData) {
-      setEmail(StoredData);
-    }
-  }, []);
+  const user = localStorage.getItem("email");
 
   const names: Name[] = [
     { navName: "Ved", navLink: "/users" },
     { navName: "Dhanusree", navLink: "/albums" },
     { navName: "Jaya Chandra", navLink: "/Usertask1" },
   ];
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+    setEmail(user);
+  }, [user, navigate]);
+
   return (
     <div className="HomeBackground">
       <h3 className="text-white text-center">{email}</h3>
@@ -38,7 +40,11 @@ const Home = () => {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/login");
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+          }}
         >
           Log out
         </button>
@@ -53,4 +59,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
