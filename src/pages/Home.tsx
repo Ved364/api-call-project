@@ -19,7 +19,7 @@ const Home = () => {
   const names: Name[] = [
     { navName: "Ved", navLink: "/users" },
     { navName: "Dhanusree", navLink: "/albums" },
-    { navName: "Jaya Chandra", navLink: "/Usertask1" },
+    { navName: "Jaya Chandra", navLink: "/UsersList" },
   ];
   return (
     <div className="HomeBackground">

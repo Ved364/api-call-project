@@ -1,0 +1,86 @@
+
+body {
+    background-color: #c7b8c871; 
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    margin-top: 80px;
+ }
+
+  .btn-back{
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    background-color: green; 
+    color: white; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer;
+    
+    
+ }
+ 
+ .header{
+    font-size: 40px;
+    font-style: italic;
+    color: rgb(28, 4, 28);
+ }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+    width: 65vw;
+    
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid  #844e4e;
+    /* text-align: center; */
+  }
+  
+  th {
+    background-color: rgb(72, 156, 72);
+    color: white;
+    text-align: center;
+
+  }
+  
+  .pagination {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .btn-pagination {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+  }
+  
+   .btn-pagination:disabled {
+    background-color: #844e4e;
+  } 
+
+  .btn-back:hover {
+    background-color: rgb(251, 104, 6);
+    font-size: 18px;
+  }
+  
+  .btn-pagination:hover{
+    background-color: rgb(251, 104, 6);
+ }
