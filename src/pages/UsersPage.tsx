@@ -18,7 +18,7 @@ type Name = {
 const UsersPage = () => {
   const names: Name[] = [
     { navName: "Dhanusree", navLink: "/albums" },
-    { navName: "Jaya Chandra", navLink: "/Usertask1" },
+    { navName: "Jaya Chandra", navLink: "/userslist" },
   ];
 
   const [data, setData] = useState<User[]>([]);
