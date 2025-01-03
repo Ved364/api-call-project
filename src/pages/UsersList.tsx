@@ -1,7 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import '../styles/userList.css';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import "../styles/userList.css";
 
 const BASE_URL = "https://jsonplaceholder.typicode.com/users";
 
@@ -25,7 +24,7 @@ const UsersList: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const currentPage = Number(queryParams.get('page') || '1');
+  const currentPage = Number(queryParams.get("page") || "1");
 
   const [userData, setUserData] = useState<User[]>([]);
   const [userDetail, setUserDetail] = useState<User | null>(null);
@@ -38,14 +37,19 @@ const UsersList: React.FC = () => {
       setLoading(true);
       setIsError({ status: false, msg: "" });
       try {
-        const response = await fetch(`${BASE_URL}?_page=${page}&_limit=${usersPerPage}`);
+        const response = await fetch(
+          `${BASE_URL}?_page=${page}&_limit=${usersPerPage}`
+        );
         if (!response.ok) throw new Error("Failed to fetch user data");
         const data = await response.json();
         setUserData(data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        setIsError({ status: true, msg: (error as Error).message || "Something went wrong!" });
+        setIsError({
+          status: true,
+          msg: (error as Error).message || "Something went wrong!",
+        });
       }
     };
 
@@ -66,7 +70,10 @@ const UsersList: React.FC = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        setIsError({ status: true, msg: (error as Error).message || "Something went wrong!" });
+        setIsError({
+          status: true,
+          msg: (error as Error).message || "Something went wrong!",
+        });
       }
     };
 
@@ -76,7 +83,7 @@ const UsersList: React.FC = () => {
   }, [id]);
 
   const handlePageChange = (pageNumber: number) => {
-    navigate(`/userslist?page=${pageNumber}`);
+    navigate(`/users-list?page=${pageNumber}`);
   };
 
   const handleBackClick = () => navigate(-1);
@@ -100,9 +107,13 @@ const UsersList: React.FC = () => {
   if (id && userDetail) {
     return (
       <div className="container">
-        <button className="btn-back" onClick={handleBackClick}>Back</button>
+        <button className="btn-back" onClick={handleBackClick}>
+          Back
+        </button>
         <h1>User Details</h1>
-        <table style={{ border: "2px solid black", borderCollapse: "collapse" }}>
+        <table
+          style={{ border: "2px solid black", borderCollapse: "collapse" }}
+        >
           <thead>
             <tr>
               <th>ID</th>
@@ -128,9 +139,13 @@ const UsersList: React.FC = () => {
 
   return (
     <div className="container">
-         <button className="btn-back" onClick={handleBackClick}>Back</button>
-      <h1 className="header"><u>Users</u></h1>
-      <table style={{ border: "2px solid black", borderCollapse: "collapse" }} >
+      <button className="btn-back" onClick={handleBackClick}>
+        Back
+      </button>
+      <h1 className="header">
+        <u>Users</u>
+      </h1>
+      <table style={{ border: "2px solid black", borderCollapse: "collapse" }}>
         <thead>
           <tr>
             <th>ID</th>
@@ -142,12 +157,14 @@ const UsersList: React.FC = () => {
         </thead>
         <tbody>
           {userData.map((eachUser) => {
-            const {id,name,username,email,address} = eachUser;
+            const { id, name, username, email, address } = eachUser;
             return (
-              <tr key={id} 
-              onClick={() => navigate(`/userslist/${id}`)} 
-                    style={{ cursor: 'pointer', textDecoration: 'none' }}  >
-                <td>{id}</td>                
+              <tr
+                key={id}
+                onClick={() => navigate(`/userslist/${id}`)}
+                style={{ cursor: "pointer", textDecoration: "none" }}
+              >
+                <td>{id}</td>
                 <td>{name}</td>
                 <td>{username}</td>
                 <td>{email}</td>
@@ -156,7 +173,7 @@ const UsersList: React.FC = () => {
             );
           })}
         </tbody>
-      </table  >
+      </table>
       <div className="pagination">
         {Array.from({ length: 5 }, (_, index) => (
           <button
@@ -174,4 +191,3 @@ const UsersList: React.FC = () => {
 };
 
 export default UsersList;
-

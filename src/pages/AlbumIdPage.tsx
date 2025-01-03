@@ -46,22 +46,24 @@ const AlbumIdPage = () => {
           Go Back
         </button>
       </div>
-      <table className="album-id-table">
-        <thead>
-          <tr>
-            <th>USERID</th>
-            <th>ID</th>
-            <th>TITLE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{album.userId}</td>
-            <td>{album.id}</td>
-            <td>{album.title}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="album-table-block">
+        <table className="album-id-table">
+          <thead>
+            <tr>
+              <th>USERID</th>
+              <th>ID</th>
+              <th>TITLE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{album.userId}</td>
+              <td>{album.id}</td>
+              <td>{album.title}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };

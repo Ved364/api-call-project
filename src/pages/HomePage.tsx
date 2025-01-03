@@ -13,7 +13,7 @@ const HomePage = () => {
   const names: Name[] = [
     { navName: "Ved", navLink: "/users" },
     { navName: "Dhanusree", navLink: "/albums" },
-    { navName: "Jaya Chandra", navLink: "/userslist" },
+    { navName: "Jaya Chandra", navLink: "/users-list" },
   ];
 
   useEffect(() => {

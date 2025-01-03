@@ -8,12 +8,17 @@
   }
   .albums-table th,tr,td{
     padding: 7px;
+    text-align: center;
   }
   .albums-table{
-    width:100%;
+    width:70%;
+  }
+  .albums-table-block{
+    display: flex;
+    justify-content: center;
   }
   .albums-table th{
-    text-align: left;
+    text-align: center;
     color:black;
     background-color: antiquewhite
   }
@@ -57,21 +62,27 @@
   }
   .album-id-table th,tr,td{
     padding: 7px;
+    text-align: center;
   }
   .album-id-table{
-    width:100%;
+    width:70%;
   }
   .album-id-table th{
-    text-align: left;
+    text-align: center;
     background-color:cadetblue;
   }
   .album-id-table td{
     background-color:cornsilk;
   }
+  .album-table-block{
+    display: flex;
+    justify-content: center;
+  }
   .back-to-albums{
     border-radius: 10px;
     margin-bottom: 40px;
     background-color: aquamarine;
+    margin:20px
   }
   .nav-bar{
     display: flex;

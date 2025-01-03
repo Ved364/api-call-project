@@ -37,7 +37,7 @@ const AlbumsPage = () => {
     }
   }, [currentPage, user, navigate]);
 
-  const prePage = () => {
+  const prevPage = () => {
     if (currentPage !== 1) {
       const newPage = currentPage - 1;
       setCurrentPage(newPage);
@@ -56,20 +56,11 @@ const AlbumsPage = () => {
     navigate(`/album/${id}`);
   };
 
-  const tablebody = data.map((album: Albumtype) => (
-    <tr key={album.id} onClick={() => handleNavId(album.id)}>
-      <td>{album.userId}</td>
-      <td>{album.id}</td>
-      <td>{album.title}</td>
-    </tr>
-  ));
-
   return (
     <>
       <Navbar />
-
-      <div>
-        <h3 className="albums-h3">Details of Users</h3>
+      <h3 className="albums-h3">Details of Users</h3>
+      <div className="albums-table-block">
         <table className="albums-table">
           <thead>
             <tr>
@@ -78,32 +69,40 @@ const AlbumsPage = () => {
               <th>TITLE</th>
             </tr>
           </thead>
-          <tbody>{tablebody}</tbody>
+          <tbody>
+            {data.map((album: Albumtype) => (
+              <tr key={album.id} onClick={() => handleNavId(album.id)}>
+                <td>{album.userId}</td>
+                <td>{album.id}</td>
+                <td>{album.title}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
+      </div>
 
-        <div className="btns-div">
-          <ul className="pagination-list">
-            <li className="btn-list">
-              <button
-                className="prev-nxt-btn"
-                onClick={prePage}
-                disabled={currentPage === 1}
-              >
-                Prev
-              </button>
-            </li>
+      <div className="btns-div">
+        <ul className="pagination-list">
+          <li className="btn-list">
+            <button
+              className="prev-nxt-btn"
+              onClick={prevPage}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </button>
+          </li>
 
-            <li className="btn-list">
-              <button
-                className="prev-nxt-btn"
-                onClick={nextPage}
-                disabled={currentPage === npage}
-              >
-                Next
-              </button>
-            </li>
-          </ul>
-        </div>
+          <li className="btn-list">
+            <button
+              className="prev-nxt-btn"
+              onClick={nextPage}
+              disabled={currentPage === npage}
+            >
+              Next
+            </button>
+          </li>
+        </ul>
       </div>
     </>
   );

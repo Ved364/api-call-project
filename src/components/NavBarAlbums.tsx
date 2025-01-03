@@ -9,7 +9,7 @@ const NavbarAlbums = () => {
   const navigate = useNavigate();
   const buttons: Props[] = [
     { nname: "Ved", nLink: "/users" },
-    { nname: "Jayachandra", nLink: "/userslist" },
+    { nname: "Jayachandra", nLink: "/users-list" },
   ];
 
   const buttonblock = buttons.map((b) => (
