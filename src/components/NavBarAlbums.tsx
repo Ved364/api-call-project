@@ -12,8 +12,8 @@ const NavbarAlbums = () => {
     { nname: "Jayachandra", nLink: "/users-list" },
   ];
 
-  const buttonblock = buttons.map((b) => (
-    <button className="btns-nav" onClick={() => navigate(b.nLink)}>
+  const buttonblock = buttons.map((b, nLink) => (
+    <button key={nLink} className="btns-nav" onClick={() => navigate(b.nLink)}>
       {b.nname}
     </button>
   ));
